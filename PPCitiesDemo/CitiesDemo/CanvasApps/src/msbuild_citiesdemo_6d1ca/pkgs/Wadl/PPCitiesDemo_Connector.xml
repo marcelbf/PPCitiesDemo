@@ -1,0 +1,45 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/new-5fppcitiesdemo-5fconnector-5fad84488acc8b1b71" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="PPCitiesDemo_Connector" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="PPCitiesDemo_Connector" />
+  <grammars>
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/new-5fppcitiesdemo-5fconnector-5fad84488acc8b1b71" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <string name="City_country_def" />
+      <string name="City_cityName_def" />
+      <object name="City">
+        <property name="country" type="string" />
+        <property name="cityName" type="string" />
+      </object>
+      <string name="GetCountries_responses_200_def_items_def" />
+      <array type="string" name="GetCountries_responses_200_def" />
+      <array typeRef="City" name="GetCities_responses_200_def" />
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/new-5fppcitiesdemo-5fconnector-5fad84488acc8b1b71">
+    <resource path="/{connectionId}/Country">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetCountries" actionName="GetCountries" siena:isDeprecated="false">
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetCountries_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+    <resource path="/{connectionId}/Cities/{country}">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <param style="template" name="country" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="GET" id="GetCities" actionName="GetCities" siena:isDeprecated="false">
+        <request />
+        <response>
+          <representation mediaType="application/json" element="service:GetCities_responses_200_def" />
+        </response>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="shared_new-5fppcitiesdemo-5fconnector-5fad84488acc8b1b71" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

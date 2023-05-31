@@ -1,0 +1,79 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PPCitiesDemo_Connector",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Country": {
+      "get": {
+        "tags": [
+          "PPCitiesDemo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ],
+        "operationId": "GetCountries",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Cities/{country}": {
+      "get": {
+        "tags": [
+          "PPCitiesDemo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ],
+        "operationId": "GetCities",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "country",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/City"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "City": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "cityName": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "host": "56f66k21-7105.usw2.devtunnels.ms",
+  "schemes": [
+    "https"
+  ]
+}

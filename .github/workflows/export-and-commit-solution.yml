@@ -30,15 +30,6 @@ jobs:
       with:
         lfs: true
 
-    - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v0
-      with:
-        environment-url: ${{env.ENVIRONMENT_URL}}
-        app-id: ${{env.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{env.TENANT_ID}}
-
-
     - name: export-solution action
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
@@ -71,7 +62,6 @@ jobs:
             overwrite: true
             managed: true
     
-    
     - name: Git Fetch and Commit 
       run: |
         git fetch --all  
@@ -82,5 +72,3 @@ jobs:
         git commit -m "Updates from the dev environment" --allow-empty
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git push
-
-    
